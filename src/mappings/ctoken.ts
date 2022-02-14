@@ -109,7 +109,7 @@ export function handleRedeem(event: Redeem): void {
   redeem.save()
 }
 
-/* Borrow assets from the protocol. All values either CELO or BEP20
+/* Borrow assets from the protocol. All values either BNB or BEP20
  *
  * event.params.totalBorrows = of the whole market (not used right now)
  * event.params.accountBorrows = total of the account
@@ -455,7 +455,7 @@ export function handleNewMarketInterestRateModel(
   let marketID = event.address.toHex()
   let market = Market.load(marketID)
   if (market == null) {
-    market = createMarket(marketID)
+    market = createMarket(marketID, event.block.number)
   }
   market.interestRateModelAddress = event.params.newInterestRateModel
   market.save()

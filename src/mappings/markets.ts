@@ -16,7 +16,7 @@ import {
 } from './helpers'
 
 let vUSDCAddress = '0x0000000000000000000000000000000000000000'
-let cCELOAddress = '0x009cd1b273cff1f371f6a1d90e046d5439460f7c'
+let cBNBAddress = '0x76e51f355eb570b815118ab38276d5efef1acbd7' // lowercase
 
 // Used for all cBEP20 contracts
 function getTokenPrice(
@@ -38,33 +38,43 @@ function getTokenPrice(
   let mantissaDecimalFactor = 18 - underlyingDecimals + 18
   let bdFactor = exponentToBigDecimal(mantissaDecimalFactor)
   let oracle2 = PriceOracle2.bind(oracleAddress)
-  underlyingPrice = oracle2
-    .getUnderlyingPrice(eventAddress)
-    .toBigDecimal()
-    .div(bdFactor)
+  let tokenPrice = oracle2.try_getUnderlyingPrice(eventAddress)
+  let tokenPriceDecimal = tokenPrice.reverted
+    ? BigDecimal.fromString('0')
+    : tokenPrice.value.toBigDecimal().div(bdFactor)
+  // underlyingPrice = oracle2
+  //   .getUnderlyingPrice(eventAddress)
+  //   .toBigDecimal()
+  //   .div(bdFactor)
 
-  return underlyingPrice
+  // return underlyingPrice
+
+  return tokenPriceDecimal
 }
 
-export function createMarket(marketAddress: string): Market {
+export function createMarket(marketAddress: string, blockNumber: BigInt): Market {
   let market: Market
   let contract = CToken.bind(Address.fromString(marketAddress))
 
-  // It is cCELO, which has a slightly different interface
-  if (marketAddress == cCELOAddress) {
+  // It is cBNB, which has a slightly different interface
+  if (marketAddress == cBNBAddress) {
     market = new Market(marketAddress)
     market.underlyingAddress = Address.fromString(
       '0x0000000000000000000000000000000000000000',
     )
     market.underlyingDecimals = 18
     market.underlyingPrice = BigDecimal.fromString('1')
-    market.underlyingName = 'Celo Coin'
-    market.underlyingSymbol = 'CELO'
+    market.underlyingName = 'Binance Coin'
+    market.underlyingSymbol = 'BNB'
     market.underlyingPriceUSD = zeroBD
     // It is all other CBEP20 contracts
   } else {
     market = new Market(marketAddress)
-    market.underlyingAddress = contract.underlying()
+    let underlyingAddress =
+      marketAddress == '0x02051bf562d7490fe677d55d2603241ad338dbde'
+        ? Address.fromString('0xc680160d4C5B4683cB53EF4D5bFF572FA4B68eE2')
+        : contract.underlying()
+    market.underlyingAddress = underlyingAddress
     let underlyingContract = BEP20.bind(market.underlyingAddress as Address)
     market.underlyingDecimals = underlyingContract.decimals()
     market.underlyingName = underlyingContract.name()
@@ -105,11 +115,16 @@ function getBNBinUSD(blockNumber: i32): BigDecimal {
   let comptroller = Comptroller.load('1')
   let oracleAddress = comptroller.priceOracle as Address
   let oracle = PriceOracle2.bind(oracleAddress)
-  let bnbPriceInUSD = oracle
-    .getUnderlyingPrice(Address.fromString(cCELOAddress))
-    .toBigDecimal()
-    .div(mantissaFactorBD)
-  return bnbPriceInUSD
+  let bnbPrice = oracle.try_getUnderlyingPrice(Address.fromString(cBNBAddress))
+  let bnbPriceDecimal = bnbPrice.reverted
+    ? BigDecimal.fromString('1')
+    : bnbPrice.value.toBigDecimal().div(mantissaFactorBD)
+  // let bnbPriceInUSD = oracle
+  //   .getUnderlyingPrice(Address.fromString(cBNBAddress))
+  //   .toBigDecimal()
+  //   .div(mantissaFactorBD)
+  // return bnbPriceInUSD
+  return bnbPriceDecimal
 }
 
 export function updateMarket(
@@ -120,7 +135,7 @@ export function updateMarket(
   let marketID = marketAddress.toHexString()
   let market = Market.load(marketID)
   if (market == null) {
-    market = createMarket(marketID)
+    market = createMarket(marketID, BigInt.fromI32(blockNumber))
   }
 
   // Only updateMarket if it has not been updated this block
@@ -130,8 +145,8 @@ export function updateMarket(
 
     let bnbPriceInUSD = getBNBinUSD(blockNumber)
 
-    // if cCELO, we only update USD price
-    if (market.id == cCELOAddress) {
+    // if cBNB, we only update USD price
+    if (market.id == cBNBAddress) {
       market.underlyingPriceUSD = bnbPriceInUSD.truncate(market.underlyingDecimals)
     } else {
       let tokenPriceUSD = getTokenPrice(
@@ -143,7 +158,7 @@ export function updateMarket(
       market.underlyingPrice = tokenPriceUSD
         .div(bnbPriceInUSD)
         .truncate(market.underlyingDecimals)
-      // if USDC, we only update CELO price
+      // if USDC, we only update BNB price
       if (market.id != vUSDCAddress) {
         market.underlyingPriceUSD = tokenPriceUSD.truncate(market.underlyingDecimals)
       }

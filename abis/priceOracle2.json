@@ -1,14 +1,23 @@
 [
   {
+    "inputs": [
+      { "internalType": "address", "name": "guardian_", "type": "address" },
+      { "internalType": "address", "name": "v1PriceOracle_", "type": "address" },
+      { "internalType": "address", "name": "cBnbAddress_", "type": "address" },
+      { "internalType": "address", "name": "cUsdcAddress_", "type": "address" },
+      { "internalType": "address", "name": "vSaiAddress_", "type": "address" },
+      { "internalType": "address", "name": "cDaiAddress_", "type": "address" },
+      { "internalType": "address", "name": "vUsdtAddress_", "type": "address" }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
     "constant": true,
     "inputs": [],
-    "name": "cCeloAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "name": "cBnbAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -16,13 +25,46 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "comptroller",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
+    "name": "cDaiAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "cUsdcAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "daiOracleKey",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      { "internalType": "contract CToken", "name": "cToken", "type": "address" }
     ],
+    "name": "getUnderlyingPrice",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "guardian",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -31,12 +73,7 @@
     "constant": true,
     "inputs": [],
     "name": "isPriceOracle",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -44,46 +81,26 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "makerUsdOracleKey",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "name": "saiPrice",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [{ "internalType": "uint256", "name": "price", "type": "uint256" }],
+    "name": "setSaiPrice",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
     "inputs": [],
-    "name": "vDaiAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "cToken",
-        "type": "address"
-      }
-    ],
-    "name": "getUnderlyingPrice",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "name": "usdcOracleKey",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -93,10 +110,7 @@
     "inputs": [],
     "name": "v1PriceOracle",
     "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
+      { "internalType": "contract V1PriceOracleInterface", "name": "", "type": "address" }
     ],
     "payable": false,
     "stateMutability": "view",
@@ -105,42 +119,19 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "vUsdcAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "name": "vSaiAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "name": "comptroller_",
-        "type": "address"
-      },
-      {
-        "name": "v1PriceOracle_",
-        "type": "address"
-      },
-      {
-        "name": "cCeloAddress_",
-        "type": "address"
-      },
-      {
-        "name": "vUsdcAddress_",
-        "type": "address"
-      },
-      {
-        "name": "vDaiAddress_",
-        "type": "address"
-      }
-    ],
+    "constant": true,
+    "inputs": [],
+    "name": "vUsdtAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

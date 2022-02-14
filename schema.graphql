@@ -21,7 +21,7 @@ type Market @entity {
     #Fields that match Chee API
     "Borrow rate per block"
     borrowRate: BigDecimal!
-    "The cToken contract balance of BEP20 or CELO"
+    "The cToken contract balance of BEP20 or BNB"
     cash: BigDecimal!
     "Collateral factor determining how much one can borrow"
     collateralFactor: BigDecimal!
@@ -47,7 +47,7 @@ type Market @entity {
     underlyingAddress: Bytes!
     "Underlying token name"
     underlyingName: String!
-    "Underlying price of token in CELO (ex. 0.007 DAI)"
+    "Underlying price of token in BNB (ex. 0.007 DAI)"
     underlyingPrice: BigDecimal!
     "Underlying token symbol"
     underlyingSymbol: String!
@@ -68,11 +68,11 @@ type Market @entity {
 }
 
 """
-Account is an CELO address, with a list of all cToken markets the account has
+Account is an BNB address, with a list of all cToken markets the account has
 participated in, along with liquidation information.
 """
 type Account @entity {
-    "User CELO address"
+    "User BNB address"
     id: ID!
     "Array of CTokens user is in"
     tokens: [AccountCToken!]! @derivedFrom(field: "account")
