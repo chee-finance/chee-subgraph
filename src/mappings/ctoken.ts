@@ -109,7 +109,7 @@ export function handleRedeem(event: Redeem): void {
   redeem.save()
 }
 
-/* Borrow assets from the protocol. All values either CELO or BEP20
+/* Borrow assets from the protocol. All values either MTR or BEP20
  *
  * event.params.totalBorrows = of the whole market (not used right now)
  * event.params.accountBorrows = total of the account
