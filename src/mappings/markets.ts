@@ -16,7 +16,12 @@ import {
 } from './helpers'
 
 let vUSDCAddress = '0x0000000000000000000000000000000000000000'
-let cMTRAddress = '0xbf5cffe28d3cba3376cd02ff12ebeca43bc3f14a'
+
+// mainnet
+// let cMTRAddress = '0xbf5cffe28d3cba3376cd02ff12ebeca43bc3f14a'
+
+// testnet
+let cMTRAddress = '0xed4d064e1105adfc6e72c7ac1c9d3bb596d82938'
 
 // Used for all cBEP20 contracts
 function getTokenPrice(
