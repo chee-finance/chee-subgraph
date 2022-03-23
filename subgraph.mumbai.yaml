@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Comptroller
-    network: celo-alfajores
+    network: mumbai
     source:
-      address: "0xd12E3dd3cC5eB25f775Cf06BB2cde49c73e31F84"
+      address: "0xdB2Fe3d19532b75FA66d621611d435b858b2311c"
       abi: Comptroller
-      startBlock: 7604225
+      startBlock: 25617351
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -50,7 +50,7 @@ dataSources:
 templates:
   - name: CToken
     kind: ethereum/contract
-    network: celo-alfajores
+    network: mumbai
     source:
       abi: CToken
     mapping:
