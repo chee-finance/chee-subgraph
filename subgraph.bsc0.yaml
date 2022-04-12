@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Comptroller
-    network: celo-alfajores
+    network: chapel
     source:
       address: "0xd12E3dd3cC5eB25f775Cf06BB2cde49c73e31F84"
       abi: Comptroller
@@ -50,7 +50,7 @@ dataSources:
 templates:
   - name: CToken
     kind: ethereum/contract
-    network: celo-alfajores
+    network: chapel
     source:
       abi: CToken
     mapping:

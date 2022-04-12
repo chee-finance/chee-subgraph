@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Comptroller
-    network: celo
+    network: bsc
     source:
-      address: "0x9BD4Fd10b531ae07437676dfE3FA6f505032CB64"
+      address: "0x0E00Ae24B84148ee93Ce2Cf4F52dE277C91B0B72"
       abi: Comptroller
-      startBlock: 11760160
+      startBlock: 16848868
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -50,7 +50,7 @@ dataSources:
 templates:
   - name: CToken
     kind: ethereum/contract
-    network: celo
+    network: bsc
     source:
       abi: CToken
     mapping:

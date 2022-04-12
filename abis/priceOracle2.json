@@ -2,7 +2,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "cCeloAddress",
+    "name": "cBnbAddress",
     "outputs": [
       {
         "name": "",
@@ -127,7 +127,7 @@
         "type": "address"
       },
       {
-        "name": "cCeloAddress_",
+        "name": "cBnbAddress_",
         "type": "address"
       },
       {

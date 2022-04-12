@@ -1,6 +1,6 @@
 # Chee-Subgraph
 
-[Chee](https://chee.finance/) is an open-source protocol for algorithmic, efficient Money Markets on Celo. This Subgraph ingests the contracts of Chee protocol.
+[Chee](https://chee.finance/) is an open-source protocol for algorithmic, efficient Money Markets on Bnb. This Subgraph ingests the contracts of Chee protocol.
 
 ## Networks and Performance
 
@@ -10,7 +10,7 @@ You can also run this subgraph locally, if you wish. Instructions for that can b
 
 ### ABI
 
-The ABI used is `ctoken.json`. It is a stripped down version of the full abi provided by Chee, that satisfies the calls we need to make for both cCELO and cBEP20 contracts. This way we can use 1 ABI file, and one mapping for cCELO and cBEP20.
+The ABI used is `ctoken.json`. It is a stripped down version of the full abi provided by Chee, that satisfies the calls we need to make for both cBNB and cBEP20 contracts. This way we can use 1 ABI file, and one mapping for cBNB and cBEP20.
 
 ## Getting started with querying
 
