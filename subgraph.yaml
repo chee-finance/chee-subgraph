@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Comptroller
-    network: meter
+    network: mainnet
     source:
       address: "0xcc0BfaD4e684023B18e0adfEcaEDd800D91dc8B5"
       abi: Comptroller
@@ -50,7 +50,7 @@ dataSources:
 templates:
   - name: CToken
     kind: ethereum/contract
-    network: meter
+    network: mainnet
     source:
       abi: CToken
     mapping:

@@ -44,10 +44,10 @@ function getTokenPrice(
   // let mantissaDecimalFactor = 18
   let bdFactor = exponentToBigDecimal(mantissaDecimalFactor)
   let oracle2 = PriceOracle2.bind(oracleAddress)
-  underlyingPrice = oracle2
-    .getUnderlyingPrice(eventAddress)
-    .toBigDecimal()
-    .div(bdFactor)
+  let tokenPrice = oracle2.try_getUnderlyingPrice(eventAddress)
+  underlyingPrice = tokenPrice.reverted
+    ? BigDecimal.fromString('0')
+    : tokenPrice.value.toBigDecimal().div(bdFactor)
 
   return underlyingPrice
 }
@@ -111,10 +111,10 @@ function getBNBinUSD(blockNumber: i32): BigDecimal {
   let comptroller = Comptroller.load('1')
   let oracleAddress = comptroller.priceOracle as Address
   let oracle = PriceOracle2.bind(oracleAddress)
-  let bnbPriceInUSD = oracle
-    .getUnderlyingPrice(Address.fromString(cMTRAddress))
-    .toBigDecimal()
-    .div(mantissaFactorBD)
+  let bnbPrice = oracle.try_getUnderlyingPrice(Address.fromString(cMTRAddress))
+  let bnbPriceInUSD = bnbPrice.reverted
+    ? BigDecimal.fromString('0')
+    : bnbPrice.value.toBigDecimal().div(mantissaFactorBD)
   return bnbPriceInUSD
 }
 
