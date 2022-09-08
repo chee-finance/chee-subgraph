@@ -113,7 +113,7 @@ function getBNBinUSD(blockNumber: i32): BigDecimal {
   let oracle = PriceOracle2.bind(oracleAddress)
   let bnbPrice = oracle.try_getUnderlyingPrice(Address.fromString(cMTRAddress))
   let bnbPriceInUSD = bnbPrice.reverted
-    ? BigDecimal.fromString('0')
+    ? BigDecimal.fromString('1')
     : bnbPrice.value.toBigDecimal().div(mantissaFactorBD)
   return bnbPriceInUSD
 }

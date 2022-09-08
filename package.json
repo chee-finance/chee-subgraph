@@ -10,8 +10,8 @@
     "build-local": "graph build subgraph.local.yaml",
     "create-local": "graph create cheenicey/chee-subgraph-alfajores --node http://127.0.0.1:8020",
     "deploy-local": "graph deploy cheenicey/chee-subgraph-alfajores subgraph.local.yaml --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020/",
-    "create-meter": "graph create cheenicey/chee-subgraph-meter --node https://graph.meter.io:8020",
-    "deploy-meter": "graph deploy cheenicey/chee-subgraph-meter --debug --ipfs https://graph.meter.io:5001 --node https://graph.meter.io:8020",
+    "create-meter": "graph create cheenicey/chee-subgraph-meter --node http://graph.meter.io:8020",
+    "deploy-meter": "graph deploy cheenicey/chee-subgraph-meter --debug --ipfs http://graph.meter.io:5001 --node http://graph.meter.io:8020",
     "deploy": "graph deploy --access-token 4bd9f7dee03040ca8c3f6c35c081a0ee cheenicey/chee-subgraph --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
     "prettier": "./node_modules/.bin/prettier —-write '**/*.ts'"
   },
